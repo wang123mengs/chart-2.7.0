@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style>
+        	html,body{
+        		width: 100%;
+        		overflow: hidden;
+        	}
+        	div{
+				width: 49.9%;
+				float: left;
+        	}
+        	#box{
+        		background-color: blue;
+        		height: 800px;
+        	}
+        	#dv{
+        		background-color: yellow;
+        		height: 800px;
+        	}
+        	#center{
+        		width: 0.2%;
+        		background-color: red;
+        		cursor: ew-resize;
+        		height: 800px;
+        	}
+        </style>
+    </head>
+    <body>
+    	<div id="box">蓝色</div>
+    	<div id="center"></div>
+    	<div id="dv">黄色</div>
+    </body>
+    <script src="jquery.min.js"></script>
+    <script>
+		    $("#center").mousedown( function(event){
+		    	var pageX =event.pageX;
+		    	var body = $("body").width();
+		    	var center = $("#center").width();
+		    	//鼠标点中center的位置
+		    	var centerX = pageX-$("#box").width();
+
+		    	$(window).on("mousemove",function(event) {
+		    		
+		    		var x = event.pageX-centerX;
+		    		var dvx = body - x-center;
+		    		$("#box").width(x+"px");
+		    		$("#dv").width(dvx+"px");
+		    	})
+		    })
+		    
+    	   	$(window).mouseup(function(){
+		    	$(window).off("mousemove","");
+		    })
+    </script>
+</html>
